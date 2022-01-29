@@ -1,30 +1,23 @@
 package com.example.apidemo.ui
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.apidemo.MainActivity
-import com.example.apidemo.R
 import com.example.apidemo.data.local.model.Quote
 import com.example.apidemo.databinding.QouteItemBinding
-import kotlin.text.Typography.quote
 
-class QuoteAdapter constructor(private val quotes: MutableList<Quote>) :
-    RecyclerView.Adapter<QuoteAdapter.QuoteViewHolder>() {
+class QuoteAdapter: RecyclerView.Adapter<QuoteAdapter.QuoteViewHolder>() {
 
 
 
-    //private var data : ArrayList<Quote>? = null
+    private var data : ArrayList<Quote>? = null
 
-    //fun setData(list: ArrayList<Quote>){
-      //  data = list
-        //notifyDataSetChanged()
+    fun setData(list: ArrayList<Quote>){
+        data = list
+        notifyDataSetChanged()
 
 
-    //}
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteViewHolder {
@@ -37,13 +30,13 @@ class QuoteAdapter constructor(private val quotes: MutableList<Quote>) :
 
     }
 
-    override fun getItemCount() = quotes.size
+    override fun getItemCount(): Int {
+        return data?.size?: 0
+    }
 
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
-        val quotes = quotes[position]
-        holder.bind(holder.itemView.context, quotes)
-        //val item = data?.get(position)
-        //holder.bind()
+        val item = data?.get(position)
+        holder.bind(item)
 
     }
 
@@ -52,10 +45,10 @@ class QuoteAdapter constructor(private val quotes: MutableList<Quote>) :
     class QuoteViewHolder(private val binding: QouteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(context: Context, quote: Quote){
+        fun bind(item: Quote?){
 
-            binding.tvTitle.text = quote.body
-            binding.tvBody.text = quote.title
+            binding.tvTitle.text = item?.author
+            binding.tvBody.text = item?.title
         }
 
     }

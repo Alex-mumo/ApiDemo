@@ -22,6 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        val view = binding.root
+
+
         //setContentView(R.layout.activity_main)
 
         quoteViewModel = ViewModelProvider(this)[QuoteViewModel::class.java]
@@ -33,16 +36,20 @@ class MainActivity : AppCompatActivity() {
             if (it!=null){
                 binding.recyclerView.visibility = View.VISIBLE
                 quoteAdapter.setData(it as ArrayList<Quote>)
+
             }else {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
             }
             binding.progressBar.visibility = View.GONE
         })
 
+        setContentView(view)
+
+
     }
 
     private fun initAdapter() {
-        quoteAdapter = QuoteAdapter(this)
+        quoteAdapter = QuoteAdapter()
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = quoteAdapter
     }
