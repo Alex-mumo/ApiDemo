@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface QuoteApi {
 
-    @GET("posts")
+    @GET("/v1/quotes/")
     fun getAllQuotes(): Call<List<Quote>>
 }

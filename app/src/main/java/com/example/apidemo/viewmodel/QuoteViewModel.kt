@@ -10,7 +10,7 @@ import com.example.apidemo.data.local.repository.QuoteRepository
 class QuoteViewModel(application: Application) : AndroidViewModel(application) {
 
     private var quoteRepository: QuoteRepository? = null
-    private var qouteListLiveData: LiveData<List<Quote>>? = null
+    var qouteListLiveData: LiveData<List<Quote>>? = null
 
     init {
         quoteRepository = QuoteRepository()
