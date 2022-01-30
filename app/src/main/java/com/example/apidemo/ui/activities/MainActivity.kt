@@ -1,4 +1,4 @@
-package com.example.apidemo
+package com.example.apidemo.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.apidemo.data.local.model.Quote
 import com.example.apidemo.databinding.ActivityMainBinding
-import com.example.apidemo.ui.QuoteAdapter
+import com.example.apidemo.ui.adapters.QuoteAdapter
 import com.example.apidemo.viewmodel.QuoteViewModel
 
 class MainActivity : AppCompatActivity() {
