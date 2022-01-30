@@ -17,7 +17,7 @@ class QuoteRepository {
         quoteApi = QuoteClient.getQuoteClient().create(QuoteApi::class.java)
     }
 
-    suspend fun fetchAllQuotes() : LiveData<List<Quote>> {
+    fun fetchAllQuotes() : LiveData<List<Quote>> {
         val quote =  MutableLiveData<List<Quote>>()
 
         quoteApi?.getAllQuotes()?.enqueue(object : Callback<List<Quote>>{

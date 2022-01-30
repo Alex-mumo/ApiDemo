@@ -1,5 +1,7 @@
 package com.example.apidemo.util
 
-object Constants {
-    const val BASE_URL = "https://healthruwords.p.rapidapi.com"
+class Constants{
+    companion object {
+        const val BASE_URL = "https://zenquotes.io/api/"
+    }
 }
