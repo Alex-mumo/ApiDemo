@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.apidemo.data.local.model.Quote
 import com.example.apidemo.data.network.QuoteApi
-import com.example.apidemo.data.network.api.QuoteClient
+import com.example.apidemo.data.network.QuoteClient
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
