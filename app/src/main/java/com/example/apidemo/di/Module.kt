@@ -1,7 +1,6 @@
 package com.example.apidemo.di
 
 import androidx.room.Room
-import com.example.apidemo.data.local.dao.QuotesDao
 import com.example.apidemo.data.local.db.QuotesDb
 import com.example.apidemo.data.network.QuoteApi
 import com.example.apidemo.util.Constants
@@ -55,8 +54,12 @@ val viewModelModule: Module = module {
     }
 }
 
+val daoModule: Module = module {
+    single { get<QuotesDb>().getQuoteDao() }
+}
 val appModule : List<Module> = listOf(
     networkingModule,
     databaseModule,
-    viewModelModule
+    viewModelModule,
+    daoModule
 )
