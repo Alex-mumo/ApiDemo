@@ -48,11 +48,6 @@ fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 }
 
-val viewModelModule: Module = module {
-    viewModel {
-        QuoteViewModel(get())
-    }
-}
 
 val daoModule: Module = module {
     single { get<QuotesDb>().getQuoteDao() }
@@ -60,6 +55,5 @@ val daoModule: Module = module {
 val appModule : List<Module> = listOf(
     networkingModule,
     databaseModule,
-    viewModelModule,
     daoModule
 )

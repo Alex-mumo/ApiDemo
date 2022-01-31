@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 
+@Suppress("DEPRECATION")
 class Internet(private val context: Context) {
     fun hasInternet(): Boolean {
         val connectivityManager = context.getSystemService(
@@ -31,6 +32,5 @@ class Internet(private val context: Context) {
             }
         }
         return false
-    }
     }
 }
