@@ -9,21 +9,18 @@ import org.koin.core.logger.Level
 import org.koin.core.module.Module
 
 open class QuoteApplication: Application() {
-
     override fun onCreate() {
         super.onCreate()
         initKoin()
     }
-
     private fun initKoin() {
         startKoin {
-            androidLogger(Level.DEBUG)
-            androidContext(this@QuoteApplication)
+            androidLogger(Level.ERROR)
+            androidContext(applicationContext)
             val modules = mutableListOf<Module>().apply {
                 addAll(appModule)
             }
             modules(modules)
         }
     }
-
 }

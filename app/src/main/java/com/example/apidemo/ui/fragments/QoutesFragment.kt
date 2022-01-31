@@ -9,14 +9,14 @@ import com.example.apidemo.data.local.model.Quote
 import com.example.apidemo.databinding.FragmentQoutesBinding
 import com.example.apidemo.ui.viewmodel.QuoteViewModel
 import com.example.apidemo.util.Resource
-import kotlin.text.Typography.quote
 
 class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
 
     private lateinit var binding: FragmentQoutesBinding
     private var quote: Quote? = null
-
-    private val viewModel by activityViewModels<QuoteViewModel>()
+    private var showQuote = false
+    //private val viewModel by activityViewModels<QuoteViewModel>()
+    private val viewModel: QuoteViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,23 +26,38 @@ class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
                 is Resource.Loading -> {
                     showProgressBar()
                     binding.noQuote.visibility = View.GONE
+                    showQuote = false
+                    quote = null
 
                 }
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data.let { qouteResponse ->
-                        quote = qouteResponse
+                        quote = qouteResponse!!
+                        binding.noQuote.visibility = View.GONE
                         dispayData()
                     }
-
+                    showQuote = true
                 }
                 is Resource.Error -> {
                     hideProgressBar()
+                    hideData()
+                    binding.noQuote.visibility = View.VISIBLE
+                    response.message.let {
+                        binding.noQuote.text = it
+                    }
+                    showQuote = false
+                    quote = null
 
                 }
             }
 
         })
+    }
+
+    private fun hideData() {
+        binding.authorTv.visibility = View.GONE
+        binding.quoteTv.visibility = View.GONE
     }
 
     private fun dispayData() {
