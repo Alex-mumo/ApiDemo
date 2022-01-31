@@ -1,6 +1,7 @@
 package com.example.apidemo.di
 
 import androidx.room.Room
+import com.example.apidemo.data.local.dao.QuotesDao
 import com.example.apidemo.data.local.db.QuotesDb
 import com.example.apidemo.data.network.QuoteApi
 import com.example.apidemo.util.Constants
@@ -48,7 +49,7 @@ fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 }
 
-val viewModelModule = module {
+val viewModelModule: Module = module {
     viewModel {
         QuoteViewModel(get())
     }
