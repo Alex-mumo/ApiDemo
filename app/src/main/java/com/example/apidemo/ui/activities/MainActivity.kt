@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.apidemo.data.local.model.Quote
 import com.example.apidemo.databinding.ActivityMainBinding
 import com.example.apidemo.ui.adapters.QuoteAdapter
-import com.example.apidemo.viewmodel.QuoteViewModel
+import com.example.apidemo.ui.viewmodel.QuoteViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
