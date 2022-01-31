@@ -3,12 +3,11 @@ package com.example.apidemo.di
 import androidx.room.Room
 import com.example.apidemo.data.local.db.QuotesDb
 import com.example.apidemo.data.network.QuoteApi
-import com.example.apidemo.util.Constants
 import com.example.apidemo.ui.viewmodel.QuoteViewModel
+import com.example.apidemo.util.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -34,6 +33,13 @@ val networkingModule: Module = module {
     }
 }
 
+val daoModule: Module = module {
+    single { get<QuotesDb>().getQuoteDao() }
+}
+
+val viewModelModule: Module = module {
+    single { QuoteViewModel(get(), get()) }
+}
 fun provideOkHttp(): OkHttpClient {
     return OkHttpClient.Builder()
         .addInterceptor(provideLoggingInterceptor())
@@ -49,11 +55,9 @@ fun provideLoggingInterceptor(): HttpLoggingInterceptor {
 }
 
 
-val daoModule: Module = module {
-    single { get<QuotesDb>().getQuoteDao() }
-}
 val appModule : List<Module> = listOf(
     networkingModule,
     databaseModule,
-    daoModule
+    daoModule,
+    viewModelModule
 )
