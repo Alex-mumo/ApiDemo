@@ -29,7 +29,7 @@
                 android:layout_gravity="center"/>
 
             <TextView
-                android:id="@+id/rvqouteTV"
+                android:id="@+id/rvqouteTv"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:textSize="26sp"
