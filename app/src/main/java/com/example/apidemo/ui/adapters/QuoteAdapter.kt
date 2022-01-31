@@ -23,7 +23,6 @@ class QuoteAdapter: RecyclerView.Adapter<QuoteAdapter.QuoteViewHolder>() {
     }
 
 
-
     // inner class QuoteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     private val differCallBack = object : DiffUtil.ItemCallback<Quote>() {

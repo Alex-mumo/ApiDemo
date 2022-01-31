@@ -2,59 +2,60 @@ package com.example.apidemo.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.example.apidemo.R
+import com.example.apidemo.data.local.model.Quote
+import com.example.apidemo.databinding.FragmentQoutesBinding
+import com.example.apidemo.ui.viewmodel.QuoteViewModel
+import com.example.apidemo.util.Resource
+import kotlin.text.Typography.quote
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [QoutesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class QoutesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentQoutesBinding
+    private var quote: Quote? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel by activityViewModels<QuoteViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_qoutes, container, false)
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment QoutesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            QoutesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        viewModel.quote.observe(viewLifecycleOwner, { response ->
+            when(response) {
+                is Resource.Loading -> {
+                    showProgressBar()
+                    binding.noQuote.visibility = View.GONE
+
+                }
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data.let { qouteResponse ->
+                        quote = qouteResponse
+                        dispayData()
+                    }
+
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+
                 }
             }
+
+        })
+    }
+
+    private fun dispayData() {
+        binding.authorTv.visibility = View.VISIBLE
+        binding.quoteTv.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        binding.loadingQt.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.loadingQt.visibility = View.VISIBLE
+        
     }
 }
