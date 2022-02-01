@@ -1,8 +1,10 @@
 package com.example.apidemo.ui.fragments
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.apidemo.R
 import com.example.apidemo.data.local.model.Quote
@@ -15,11 +17,14 @@ class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
     private lateinit var binding: FragmentQoutesBinding
     private var quote: Quote? = null
     private var showQuote = false
-    //private val viewModel by activityViewModels<QuoteViewModel>()
     private val viewModel: QuoteViewModel by activityViewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
 
         viewModel.quote.observe(viewLifecycleOwner, { response ->
             when(response) {
@@ -54,6 +59,7 @@ class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
 
         })
     }
+
 
     private fun hideData() {
         binding.authorTv.visibility = View.GONE

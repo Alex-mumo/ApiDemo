@@ -49,7 +49,6 @@ class QuoteViewModel(private val quoteRepository: QuoteRepository, private val i
             return Resource.Success(response.body()!![0])
         }
         return Resource.Error(response.message())
-
     }
 
     fun saveQuote(quote: Quote) = viewModelScope.launch {
