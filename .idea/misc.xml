@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_qoutes.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/layout/qoute_item.xml" value="0.19322916666666667" />
       </map>
     </option>
