@@ -26,7 +26,7 @@ class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
     private lateinit var binding: FragmentQoutesBinding
     private var quote: Quote? = null
     private var showQuote = false
-    private val viewModel: QuoteViewModel by viewModels()
+    val viewModel: QuoteViewModel by viewModels()
 
     @SuppressLint("ClickableViewAccessibility")
 
@@ -84,6 +84,7 @@ class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
         super.onViewCreated(view, savedInstanceState)
         setUpUI()
     }
+
 
     private fun setUpUI() {
         viewModel.quote.observe(viewLifecycleOwner, { response ->
