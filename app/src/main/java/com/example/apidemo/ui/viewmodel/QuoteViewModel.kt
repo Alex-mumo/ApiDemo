@@ -20,7 +20,7 @@ class QuoteViewModel(private val quoteRepository: QuoteRepository, private val i
         fetchQuotes()
     }
 
-    private fun fetchQuotes() = viewModelScope.launch {
+    fun fetchQuotes() = viewModelScope.launch {
         safeQuoteCall()
     }
 
