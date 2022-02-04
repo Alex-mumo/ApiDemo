@@ -8,7 +8,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.core.module.Module
 
-open class QuoteApplication: Application() {
+class QuoteApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         initKoin()

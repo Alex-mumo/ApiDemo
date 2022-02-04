@@ -13,9 +13,7 @@ import java.io.IOException
 
 
 class QuoteViewModel(private val quoteRepository: QuoteRepository, private val internet: Internet) : ViewModel() {
-
     val quote: MutableLiveData<Resource<Quote>> = MutableLiveData()
-
     init {
         fetchQuotes()
     }
@@ -39,7 +37,6 @@ class QuoteViewModel(private val quoteRepository: QuoteRepository, private val i
                 is IOException -> quote.postValue(Resource.Error("Network Failure"))
                 else -> quote.postValue(Resource.Error("Another error"))
             }
-
         }
 
     }
@@ -54,8 +51,8 @@ class QuoteViewModel(private val quoteRepository: QuoteRepository, private val i
     fun saveQuote(quote: Quote) = viewModelScope.launch {
         quoteRepository.saveQuote(quote)
     }
+
     fun deleteQuote(quote: Quote) = viewModelScope.launch {
         quoteRepository.deleteQuote(quote)
     }
-
 }

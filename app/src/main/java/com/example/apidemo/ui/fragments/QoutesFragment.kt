@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.apidemo.R
 import com.example.apidemo.data.local.model.Quote
 import com.example.apidemo.databinding.FragmentQoutesBinding
 import com.example.apidemo.ui.viewmodel.QuoteViewModel
@@ -22,14 +21,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.min
 
-class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
+class QoutesFragment : Fragment() {
     private lateinit var binding: FragmentQoutesBinding
     private var quote: Quote? = null
     private var showQuote = false
-    val viewModel: QuoteViewModel by viewModels()
+    private val viewModel: QuoteViewModel by viewModels()
 
     @SuppressLint("ClickableViewAccessibility")
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,14 +48,14 @@ class QoutesFragment : Fragment(R.layout.fragment_qoutes) {
                             .setDuration(150)
                             .setListener(object : AnimatorListenerAdapter()  {
                                 override fun onAnimationEnd(animation: Animator?) {
-                                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Default) {
+                                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                                         delay(100)
                                         if (currentX < Constants.SWIPE_DISTANCE){
                                             viewModel.fetchQuotes()
                                             currentX = 0f
                                         }
                                     }
-                                    //super.onAnimationEnd(animation)
+                                    //
                                 }
                             }).start()
                     }
